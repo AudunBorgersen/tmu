@@ -7,7 +7,7 @@ This guide shows how to run TMU with VSCODE both in remote development with SSH 
 
 - Docker installed on your local machine. **Optional - When not using remote SSH**
 - Visual Studio Code installed.
-- Remote - Containers extension installed in VSCode.
+- Dev Containers extension installed in VSCode.
 - Ensure Git is installed on your system. This guide utilizes Git Bash for command execution across all operating systems, including Windows.
 
 # 1. SSH Configuration
@@ -136,8 +136,8 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 WORKDIR /app
 COPY . /app
 
-# If you have a requirements.txt, install dependencies
-RUN pip3 install --no-cache-dir -r requirements.txt
+# If you have a requirements.txt, uncomment the line below to install dependencies
+# RUN pip3 install --no-cache-dir -r requirements.txt
 
 CMD [ "tail", "-f", "/dev/null" ]
 
@@ -168,7 +168,7 @@ Create **`devcontainer.json`**
 ## **Using the Setup**
 
 - After configuring your **`.devcontainer`** directory with the **`Dockerfile`**, **`docker-compose.yml`**, and **`devcontainer.json`**, open your project in VSCode.
-- VSCode may prompt you to reopen the project in a container. If not, you can manually do so by opening the Command Palette (**`F1`** or **`Ctrl+Shift+P`**/**`Cmd+Shift+P`**) and selecting "Remote-Containers: Reopen in Container".
+- VSCode may prompt you to reopen the project in a container. If not, you can manually do so by opening the Command Palette (**`F1`** or **`Ctrl+Shift+P`**/**`Cmd+Shift+P`**) and selecting "dev containers rebuild and reopen in container".
 - This will build your Docker container as defined, including the necessary GPU assignments for CUDA development.
 
 # **3. Development Using Devcontainers on a Remote Machine (SSH)**
@@ -186,5 +186,5 @@ Running your development environment on a remote machine can provide significant
 1. **Connect to Your Remote Machine via SSH**: Open VSCode, then open the Command Palette and select "Remote-SSH: Connect to Host...". Choose your remote machine from the list or add a new SSH connection.
 2. **Initialize Your Project on the Remote Machine**: You can clone your repository or access your project files on the remote machine. This might involve using Git commands within the terminal in VSCode once connected to the remote machine.
 3. **Configure the Devcontainer**: Similar to the local setup, create a **`.devcontainer`** directory in your project on the remote machine with a **`Dockerfile`** and **`devcontainer.json`**. These files might already exist if you cloned a repository already configured for Devcontainer development.
-4. **Open Your Project in a Container Over SSH**: With the remote SSH connection active and your project open in VSCode, use the Command Palette to select "Remote-Containers: Reopen in Container". This will build and start the container on the remote machine, with VSCode connecting to it over SSH.
+4. **Open Your Project in a Container Over SSH**: With the remote SSH connection active and your project open in VSCode, use the Command Palette to select "dev containers rebuild and reopen in container". This will build and start the container on the remote machine, with VSCode connecting to it over SSH.
 5. **Start Developing Remotely**: You can now develop directly on the remote machine, utilizing its resources while benefiting from a consistent, containerized environment controlled by your Devcontainer configuration.
